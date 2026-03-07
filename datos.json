@@ -1,0 +1,331 @@
+{
+  "año": 2026,
+  "_colores_disponibles": {
+    "azul_electrico": "#4d9fff",
+    "naranja_coral": "#ff7b54",
+    "violeta_suave": "#a78bfa",
+    "verde_lima": "#c8f135",
+    "rojo": "#ff5e5e",
+    "esmeralda": "#34d399",
+    "ambar": "#f59e0b",
+    "rosa_fucsia": "#e879f9",
+    "azul_cielo": "#38bdf8",
+    "rosa_salmon": "#fb7185",
+    "verde_menta": "#4ade80",
+    "dorado": "#fbbf24",
+    "indigo": "#818cf8"
+  },
+  "activos": [
+    {
+      "id": "bbva",
+      "nombre": "BBVA",
+      "ticker": "BME:BBVA",
+      "color": "#4d9fff",
+      "capitalInicial": 5000,
+      "desdeMes": "Ene",
+      "hastaMes": "Dic"
+    },
+    {
+      "id": "vanguard",
+      "nombre": "Vanguard Global",
+      "ticker": "IE00B03HCZ61",
+      "color": "#ff7b54",
+      "capitalInicial": 0,
+      "desdeMes": "Ene",
+      "hastaMes": "Dic"
+    },
+    {
+      "id": "quality",
+      "nombre": "BBVA Quality Inv.",
+      "ticker": "Fondo Decidida",
+      "color": "#a78bfa",
+      "capitalInicial": 1910,
+      "desdeMes": "Ene",
+      "hastaMes": "Dic"
+    },
+    {
+      "id": "redeia",
+      "nombre": "Redeia",
+      "ticker": "RED (BME)",
+      "color": "#c8f135",
+      "capitalInicial": 2000,
+      "desdeMes": "Ene",
+      "hastaMes": "Mar"
+    },
+    {
+      "id": "mega",
+      "nombre": "megatendencia tecnologia",
+      "ticker": "ES0147711032",
+      "color": "#ff5e5e",
+      "capitalInicial": 4840,
+      "desdeMes": "Ene",
+      "hastaMes": "Mar"
+    }
+  ],
+  "datos": {
+    "Ene": {
+      "bbva": {
+        "valor": 9875,
+        "aportacion": 0
+      },
+      "vanguard": {
+        "valor": 0,
+        "aportacion": 0
+      },
+      "quality": {
+        "valor": 2146,
+        "aportacion": 0
+      },
+      "redeia": {
+        "valor": 1833,
+        "aportacion": 0
+      },
+      "mega": {
+        "valor": 5655,
+        "aportacion": 0
+      }
+    },
+    "Feb": {
+      "bbva": {
+        "valor": 9252,
+        "aportacion": 0
+      },
+      "vanguard": {
+        "valor": 0,
+        "aportacion": 0
+      },
+      "quality": {
+        "valor": 2174,
+        "aportacion": 0
+      },
+      "redeia": {
+        "valor": 1952,
+        "aportacion": 0
+      },
+      "mega": {
+        "valor": 5319,
+        "aportacion": 0
+      }
+    },
+    "Mar": {
+      "bbva": {
+        "valor": 13634,
+        "aportacion": 5000
+      },
+      "vanguard": {
+        "valor": 1600,
+        "aportacion": 1600
+      },
+      "quality": {
+        "valor": 2135,
+        "aportacion": 0
+      },
+      "redeia": {
+        "valor": 1814,
+        "aportacion": 0
+      },
+      "mega": {
+        "valor": 5662,
+        "aportacion": 300
+      }
+    },
+    "Abr": {
+      "bbva": {
+        "valor": 0,
+        "aportacion": 0
+      },
+      "vanguard": {
+        "valor": 0,
+        "aportacion": 0
+      },
+      "quality": {
+        "valor": 0,
+        "aportacion": 0
+      },
+      "redeia": {
+        "valor": 0,
+        "aportacion": 0
+      },
+      "mega": {
+        "valor": 0,
+        "aportacion": 0
+      }
+    },
+    "May": {
+      "bbva": {
+        "valor": 0,
+        "aportacion": 0
+      },
+      "vanguard": {
+        "valor": 0,
+        "aportacion": 0
+      },
+      "quality": {
+        "valor": 0,
+        "aportacion": 0
+      },
+      "redeia": {
+        "valor": 0,
+        "aportacion": 0
+      },
+      "mega": {
+        "valor": 0,
+        "aportacion": 0
+      }
+    },
+    "Jun": {
+      "bbva": {
+        "valor": 0,
+        "aportacion": 0
+      },
+      "vanguard": {
+        "valor": 0,
+        "aportacion": 0
+      },
+      "quality": {
+        "valor": 0,
+        "aportacion": 0
+      },
+      "redeia": {
+        "valor": 0,
+        "aportacion": 0
+      },
+      "mega": {
+        "valor": 0,
+        "aportacion": 0
+      }
+    },
+    "Jul": {
+      "bbva": {
+        "valor": 0,
+        "aportacion": 0
+      },
+      "vanguard": {
+        "valor": 0,
+        "aportacion": 0
+      },
+      "quality": {
+        "valor": 0,
+        "aportacion": 0
+      },
+      "redeia": {
+        "valor": 0,
+        "aportacion": 0
+      },
+      "mega": {
+        "valor": 0,
+        "aportacion": 0
+      }
+    },
+    "Ago": {
+      "bbva": {
+        "valor": 0,
+        "aportacion": 0
+      },
+      "vanguard": {
+        "valor": 0,
+        "aportacion": 0
+      },
+      "quality": {
+        "valor": 0,
+        "aportacion": 0
+      },
+      "redeia": {
+        "valor": 0,
+        "aportacion": 0
+      },
+      "mega": {
+        "valor": 0,
+        "aportacion": 0
+      }
+    },
+    "Sep": {
+      "bbva": {
+        "valor": 0,
+        "aportacion": 0
+      },
+      "vanguard": {
+        "valor": 0,
+        "aportacion": 0
+      },
+      "quality": {
+        "valor": 0,
+        "aportacion": 0
+      },
+      "redeia": {
+        "valor": 0,
+        "aportacion": 0
+      },
+      "mega": {
+        "valor": 0,
+        "aportacion": 0
+      }
+    },
+    "Oct": {
+      "bbva": {
+        "valor": 0,
+        "aportacion": 0
+      },
+      "vanguard": {
+        "valor": 0,
+        "aportacion": 0
+      },
+      "quality": {
+        "valor": 0,
+        "aportacion": 0
+      },
+      "redeia": {
+        "valor": 0,
+        "aportacion": 0
+      },
+      "mega": {
+        "valor": 0,
+        "aportacion": 0
+      }
+    },
+    "Nov": {
+      "bbva": {
+        "valor": 0,
+        "aportacion": 0
+      },
+      "vanguard": {
+        "valor": 0,
+        "aportacion": 0
+      },
+      "quality": {
+        "valor": 0,
+        "aportacion": 0
+      },
+      "redeia": {
+        "valor": 0,
+        "aportacion": 0
+      },
+      "mega": {
+        "valor": 0,
+        "aportacion": 0
+      }
+    },
+    "Dic": {
+      "bbva": {
+        "valor": 0,
+        "aportacion": 0
+      },
+      "vanguard": {
+        "valor": 0,
+        "aportacion": 0
+      },
+      "quality": {
+        "valor": 0,
+        "aportacion": 0
+      },
+      "redeia": {
+        "valor": 0,
+        "aportacion": 0
+      },
+      "mega": {
+        "valor": 0,
+        "aportacion": 0
+      }
+    }
+  }
+}
