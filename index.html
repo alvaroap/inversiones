@@ -657,7 +657,7 @@
   <div class="entry-panel" id="entry-panel" style="display:none">
     <div class="month-selector" id="month-selector"></div>
     <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:18px">
-      <button class="btn-action" onclick="openModal()">⚙ Gestionar activos</button>
+      <button class="btn-action" onclick="showJsonInfo()">⚙ Cómo editar activos</button>
       <button class="btn-action" onclick="exportData()">↓ Exportar datos</button>
     </div>
     <div id="entry-fields"></div>
@@ -666,23 +666,32 @@
 
 </div>
 
-<!-- MODAL -->
+<!-- MODAL INFO JSON -->
 <div class="modal-backdrop" id="modal-backdrop" onclick="handleBackdropClick(event)">
   <div class="modal">
-    <div class="modal-title">Gestionar activos</div>
-    <div class="modal-sub">Define cada activo, su rango de meses activo y el <strong style="color:var(--text)">capital histórico</strong> con el que arranca en enero (valor con el que cerró el año anterior). Las aportaciones mensuales son solo dinero nuevo que metes cada mes.</div>
-    <div class="modal-col-headers">
-      <span>Nombre</span>
-      <span>Capital inicio (€)</span>
-      <span>Desde</span>
-      <span class="end-label">Hasta</span>
-      <span></span>
+    <div class="modal-title">Editar activos</div>
+    <div class="modal-sub">Los activos se definen en <strong style="color:var(--accent)">datos.json</strong>, el archivo que tienes en GitHub. Edítalo y vuelve a subirlo para que el dashboard lo cargue.</div>
+
+    <div style="background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:16px;font-size:0.72rem;line-height:1.9;color:var(--text);font-family:monospace;overflow-x:auto;margin-bottom:20px">
+      {<br>
+      &nbsp;&nbsp;<span style="color:var(--accent)">"id"</span>: <span style="color:#ff7b54">"mi_activo"</span>,<br>
+      &nbsp;&nbsp;<span style="color:var(--accent)">"nombre"</span>: <span style="color:#ff7b54">"Nombre visible"</span>,<br>
+      &nbsp;&nbsp;<span style="color:var(--accent)">"ticker"</span>: <span style="color:#ff7b54">"BME:XXXX"</span>,<br>
+      &nbsp;&nbsp;<span style="color:var(--accent)">"color"</span>: <span style="color:#ff7b54">"#c8f135"</span>,<br>
+      &nbsp;&nbsp;<span style="color:var(--accent)">"capitalInicial"</span>: <span style="color:#4d9fff">0</span>,<br>
+      &nbsp;&nbsp;<span style="color:var(--accent)">"desdeMes"</span>: <span style="color:#ff7b54">"Ene"</span>,<br>
+      &nbsp;&nbsp;<span style="color:var(--accent)">"hastaMes"</span>: <span style="color:#ff7b54">"Dic"</span><br>
+      }
     </div>
-    <div id="modal-assets-list"></div>
-    <button class="btn-add-asset" onclick="addModalAsset()">+ Añadir activo</button>
+
+    <div style="font-size:0.72rem;color:var(--muted);line-height:1.8;margin-bottom:20px">
+      <strong style="color:var(--text)">Meses válidos:</strong> Ene · Feb · Mar · Abr · May · Jun · Jul · Ago · Sep · Oct · Nov · Dic<br>
+      <strong style="color:var(--text)">Para activo parcial:</strong> <span style="color:var(--accent)">"desdeMes": "Mar", "hastaMes": "Jun"</span><br>
+      <strong style="color:var(--text)">Tras editar:</strong> sube datos.json a GitHub y recarga la página
+    </div>
+
     <div class="modal-actions">
-      <button class="btn-modal-cancel" onclick="closeModal()">Cancelar</button>
-      <button class="btn-modal-save" onclick="saveModal()">Guardar cambios</button>
+      <button class="btn-modal-cancel" onclick="closeModal()">Cerrar</button>
     </div>
   </div>
 </div>
@@ -694,24 +703,29 @@
 const MONTHS = ['Ene','Feb','Mar','Abr','May','Jun','Jul','Ago','Sep','Oct','Nov','Dic'];
 const PALETTE = ['#4d9fff','#ff7b54','#a78bfa','#c8f135','#ff5e5e','#34d399','#f59e0b','#e879f9'];
 
-// ── STATE ─────────────────────────────────────────────────────────────────────
-function loadState() {
-  try {
-    const s = JSON.parse(localStorage.getItem('cartera_v2') || 'null');
-    if (s && s.assets) return s;
-  } catch(e) {}
+// ── JSON SOURCE ───────────────────────────────────────────────────────────────
+// Cambia esta URL por la URL raw de tu datos.json en GitHub:
+// https://raw.githubusercontent.com/TU_USUARIO/TU_REPO/main/datos.json
+const JSON_URL = 'datos.json';
+
+// ── CONVERT JSON FORMAT → INTERNAL STATE ─────────────────────────────────────
+function jsonToState(json) {
   return {
-    assets: [
-      { id:'bbva',     name:'BBVA',              ticker:'BME:BBVA',       color:'#4d9fff', startMonth:0, endMonth:11, capitalInicial:0 },
-      { id:'vanguard', name:'Vanguard Global',   ticker:'IE00B03HCZ61',   color:'#ff7b54', startMonth:0, endMonth:11, capitalInicial:0 },
-      { id:'fondo',    name:'BBVA Quality Inv.', ticker:'Fondo Decidida', color:'#a78bfa', startMonth:0, endMonth:11, capitalInicial:0 },
-    ],
-    data: {}
+    assets: json.activos.map(a => ({
+      id:            a.id,
+      name:          a.nombre,
+      ticker:        a.ticker,
+      color:         a.color,
+      capitalInicial: a.capitalInicial || 0,
+      startMonth:    MONTHS.indexOf(a.desdeMes),
+      endMonth:      MONTHS.indexOf(a.hastaMes)
+    })),
+    data: json.datos || {}
   };
 }
-function persist() { localStorage.setItem('cartera_v2', JSON.stringify(state)); }
 
-let state = loadState();
+// ── STATE ─────────────────────────────────────────────────────────────────────
+let state = { assets: [], data: {} };
 let selectedMonth = new Date().getMonth();
 let chartView = 'total';
 let chartInstance = null;
@@ -802,7 +816,7 @@ function saveData() {
     const apor = parseFloat(document.getElementById(`apor_${a.id}`)?.value) || 0;
     state.data[mk][a.id] = { valor: val, aportacion: apor };
   });
-  persist(); render(); toast('✓ Datos guardados');
+  render(); toast('✓ Datos guardados (recuerda actualizar datos.json)');
 }
 
 // ── RENDER ────────────────────────────────────────────────────────────────────
@@ -939,11 +953,10 @@ function renderChart() {
 // ── MODAL ─────────────────────────────────────────────────────────────────────
 let modalAssets = [];
 
-function openModal() {
-  modalAssets = state.assets.map(a => ({...a}));
-  renderModal();
+function showJsonInfo() {
   document.getElementById('modal-backdrop').classList.add('open');
 }
+function openModal() { showJsonInfo(); }
 function closeModal() { document.getElementById('modal-backdrop').classList.remove('open'); }
 function handleBackdropClick(e) { if (e.target.id==='modal-backdrop') closeModal(); }
 
@@ -970,7 +983,7 @@ function removeModalAsset(idx) { modalAssets.splice(idx,1); renderModal(); }
 
 function saveModal() {
   state.assets = modalAssets;
-  persist(); closeModal(); render(); renderEntryFields();
+  closeModal(); render(); renderEntryFields();
   toast('✓ Activos actualizados');
 }
 
@@ -1014,10 +1027,26 @@ function toggleEntry() {
   chevron.style.transform = open ? 'rotate(0deg)' : 'rotate(180deg)';
 }
 
-// ── INIT ──────────────────────────────────────────────────────────────────────
-renderMonthSelector();
-renderEntryFields();
-render();
+// ── INIT: carga datos.json ────────────────────────────────────────────────────
+async function init() {
+  try {
+    const res = await fetch(JSON_URL + '?t=' + Date.now());
+    if (!res.ok) throw new Error('No se pudo cargar datos.json');
+    const json = await res.json();
+    state = jsonToState(json);
+    document.getElementById('header-count').textContent =
+      state.assets.length + ' activos · ' + (json.año || new Date().getFullYear());
+  } catch(e) {
+    console.warn('datos.json no encontrado:', e.message);
+    document.getElementById('hero-capital-sub').textContent =
+      '⚠ No se encontró datos.json — súbelo a GitHub junto al index.html';
+  }
+  renderMonthSelector();
+  renderEntryFields();
+  render();
+}
+
+init();
 </script>
 </body>
 </html>
