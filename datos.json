@@ -5,8 +5,8 @@
     "naranja_coral": "#ff7b54",
     "violeta_suave": "#a78bfa",
     "verde_lima": "#c8f135",
-    "rojo": "#ff5e5e",
     "esmeralda": "#34d399",
+    "rojo": "#ff5e5e",
     "ambar": "#f59e0b",
     "rosa_fucsia": "#e879f9",
     "azul_cielo": "#38bdf8",
@@ -56,7 +56,7 @@
       "id": "mega",
       "nombre": "megatendencia tecnologia",
       "ticker": "ES0147711032",
-      "color": "#ff5e5e",
+      "color": "#34d399",
       "capitalInicial": 4840,
       "desdeMes": "Ene",
       "hastaMes": "Mar"
