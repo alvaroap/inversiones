@@ -109,11 +109,11 @@
     },
     "Mar": {
       "bbva": {
-        "valor": 13634,
+        "valor": 13502,
         "aportacion": 5000
       },
       "vanguard": {
-        "valor": 1600,
+        "valor": 0,
         "aportacion": 1600
       },
       "quality": {
@@ -131,15 +131,15 @@
     },
     "Abr": {
       "bbva": {
-        "valor": 13700,
+        "valor": 0,
         "aportacion": 0
       },
       "vanguard": {
-        "valor": 1600,
+        "valor": 0,
         "aportacion": 0
       },
       "quality": {
-        "valor": 2150,
+        "valor": 0,
         "aportacion": 0
       },
       "redeia": {
