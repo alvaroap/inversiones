@@ -2,10 +2,10 @@
   "año": 2026,
   "_colores_disponibles": {
     "azul_electrico": "#4d9fff",
-    "naranja_coral": "#ff7b54",
+    "esmeralda": "#34d399",
     "violeta_suave": "#a78bfa",
     "verde_lima": "#c8f135",
-    "esmeralda": "#34d399",
+    "naranja_coral": "#ff7b54",
     "rojo": "#ff5e5e",
     "ambar": "#f59e0b",
     "rosa_fucsia": "#e879f9",
@@ -29,7 +29,7 @@
       "id": "vanguard",
       "nombre": "Vanguard Global",
       "ticker": "IE00B03HCZ61",
-      "color": "#ff7b54",
+      "color": "#34d399",
       "capitalInicial": 0,
       "desdeMes": "Ene",
       "hastaMes": "Dic"
@@ -56,7 +56,7 @@
       "id": "mega",
       "nombre": "megatendencia tecnologia",
       "ticker": "ES0147711032",
-      "color": "#34d399",
+      "color": "#ff7b54",
       "capitalInicial": 4840,
       "desdeMes": "Ene",
       "hastaMes": "Mar"
