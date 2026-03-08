@@ -37,7 +37,7 @@
     {
       "id": "quality",
       "nombre": "BBVA Quality Inv.",
-      "ticker": "Fondo Decidida",
+      "ticker": "ES0157663008",
       "color": "#a78bfa",
       "capitalInicial": 1910,
       "desdeMes": "Ene",
@@ -131,15 +131,15 @@
     },
     "Abr": {
       "bbva": {
-        "valor": 0,
+        "valor": 13700,
         "aportacion": 0
       },
       "vanguard": {
-        "valor": 0,
+        "valor": 1600,
         "aportacion": 0
       },
       "quality": {
-        "valor": 0,
+        "valor": 2150,
         "aportacion": 0
       },
       "redeia": {
