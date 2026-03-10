@@ -104,7 +104,6 @@
     transition: border-color 0.2s;
   }
   .hero-card:hover { border-color: #2a3a50; }
-  .hero-card.main { grid-column: 1 / -1; background: var(--surface2); }
   .hero-card::after {
     content: '';
     position: absolute;
@@ -130,7 +129,6 @@
     line-height: 1;
     color: #e8eaed;
   }
-  .hero-card.main .card-value { font-size: 3rem; }
   .card-value.positive { color: var(--gain); }
   .card-value.negative { color: var(--loss); }
   .card-value.neutral  { color: var(--text); }
@@ -142,7 +140,7 @@
     margin-top: 8px;
   }
   .hero-card .card-sub {
-    font-size: 1.0rem;
+    font-size: 1.2rem;
     color: #c8f135;
   }
   .badge {
@@ -220,8 +218,7 @@
   .asset-capital {
     font-family: var(--font);
     font-weight: 300;
-    /*font-size: 0.72rem;*/
-    font-size: 0.88rem;
+    font-size: 0.72rem;
     color: var(--muted);
     text-align: right;
   }
@@ -307,39 +304,6 @@
   }
   canvas { width: 100% !important; }
 
-  /* ENTRY PANEL */
-  .entry-panel {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    padding: 24px;
-    margin-top: 8px;
-  }
-  .month-selector { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 16px; }
-  .month-btn {
-    background: var(--bg);
-    border: 1px solid var(--border);
-    color: var(--muted);
-    border-radius: 6px;
-    padding: 5px 10px;
-    font-family: var(--font);
-    font-weight: 400;
-    font-size: 0.66rem;
-    cursor: pointer;
-    transition: all 0.15s;
-    letter-spacing: 0.03em;
-    position: relative;
-  }
-  .month-btn.active { background: var(--accent-dim); border-color: var(--accent); color: var(--accent); }
-  .month-btn.has-data::after {
-    content: '';
-    position: absolute;
-    bottom: 3px; right: 3px;
-    width: 4px; height: 4px;
-    border-radius: 50%;
-    background: var(--accent);
-    opacity: 0.7;
-  }
   .btn-action {
     background: var(--accent-dim);
     border: 1px solid var(--accent);
@@ -594,7 +558,6 @@
     .hero { grid-template-columns: 1fr; }
     .hero-card.main { grid-column: 1; }
     .card-value { font-size: 2rem; }
-    .hero-card.main .card-value { font-size: 2.4rem; }
     .asset-row { grid-template-columns: 8px 1fr auto auto; gap: 10px; }
     .asset-capital { display: none; }
     .chart-legend-dynamic { display: none; }
@@ -622,7 +585,7 @@
   </header>
 
   <div class="hero">
-    <div class="hero-card main">
+    <div class="hero-card">
       <div class="card-label">Valor total de cartera</div>
       <div class="card-value neutral" id="hero-valor">—</div>
       <div class="card-sub" id="hero-capital-sub">Introduce datos abajo para empezar</div>
@@ -631,6 +594,19 @@
       <div class="card-label">Ganancia / Pérdida</div>
       <div class="card-value" id="hero-ganancia">—</div>
       <div id="hero-badge"></div>
+    </div>
+    <div class="hero-card" id="card-inflation">
+      <div class="card-label" style="display:flex;align-items:center;justify-content:space-between">
+        <span>Poder adquisitivo en 1 año</span>
+        <span style="display:flex;align-items:center;gap:4px">
+          <input id="inflation-input" type="number" value="3" min="0" max="20" step="0.1"
+            style="width:58px;background:var(--bg);border:1px solid var(--border);border-radius:5px;color:var(--accent);font-family:var(--font);font-size:0.72rem;padding:2px 5px;text-align:center;outline:none"
+            oninput="renderInflation()">
+          <span style="color:var(--muted);font-size:0.65rem">% IPC</span>
+        </span>
+      </div>
+      <div class="card-value negative" id="hero-inflation">—</div>
+      <div class="card-sub" id="hero-inflation-sub">equivale en valor real</div>
     </div>
     <div class="hero-card">
       <div class="card-label">Rentabilidad acum.</div>
@@ -645,29 +621,13 @@
   <div class="section-title">Evolución</div>
   <div class="chart-wrap">
     <div class="chart-header">
-      <span class="chart-title" id="chart-title">Valor vs Capital — 2025</span>
-      <div class="chart-toggle">
-        <button class="chart-toggle-btn active" onclick="setChartView('total')">Total</button>
-        <button class="chart-toggle-btn" onclick="setChartView('activos')">Por activo</button>
-      </div>
+      <span class="chart-title" id="chart-title">Evolución de cartera — 2025</span>
     </div>
     <canvas id="chart" height="180"></canvas>
     <div class="chart-legend-dynamic" id="chart-legend"></div>
   </div>
 
-  <div class="section-title" id="entry-toggle" onclick="toggleEntry()" style="cursor:pointer;user-select:none">
-    Actualizar datos
-    <span id="entry-chevron" style="margin-left:auto;font-size:0.8rem;transition:transform 0.25s;display:inline-block;transform:rotate(0deg)">▾</span>
-  </div>
-  <div class="entry-panel" id="entry-panel" style="display:none">
-    <div class="month-selector" id="month-selector"></div>
-    <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:18px">
-      <button class="btn-action" onclick="showJsonInfo()">⚙ Cómo editar activos</button>
-      <button class="btn-action" onclick="exportData()">↓ Exportar datos</button>
-    </div>
-    <div id="entry-fields"></div>
-    <button class="btn-save" onclick="saveData()">Guardar mes →</button>
-  </div>
+
 
 </div>
 
@@ -731,8 +691,6 @@ function jsonToState(json) {
 
 // ── STATE ─────────────────────────────────────────────────────────────────────
 let state = { assets: [], data: {} };
-let selectedMonth = new Date().getMonth();
-let chartView = 'total';
 let chartInstance = null;
 
 // ── UTILS ─────────────────────────────────────────────────────────────────────
@@ -773,15 +731,6 @@ function latestMonthIdx() {
   }
   return -1;
 }
-
-// ── MONTH SELECTOR ────────────────────────────────────────────────────────────
-function renderMonthSelector() {
-  document.getElementById('month-selector').innerHTML = MONTHS.map((m,i) => {
-    const hasDat = state.assets.some(a => (state.data[m]?.[a.id]?.valor || 0) > 0);
-    return `<button class="month-btn${i===selectedMonth?' active':''}${hasDat?' has-data':''}" onclick="selectMonth(${i})">${m}</button>`;
-  }).join('');
-}
-function selectMonth(i) { selectedMonth=i; renderMonthSelector(); renderEntryFields(); }
 
 // ── ENTRY FIELDS ─────────────────────────────────────────────────────────────
 function renderEntryFields() {
@@ -887,76 +836,149 @@ function render() {
   }
 
   renderChart();
-  renderMonthSelector();
+  renderInflation();
 }
 
-// ── CHART ─────────────────────────────────────────────────────────────────────
-function setChartView(v) {
-  chartView = v;
-  document.querySelectorAll('.chart-toggle-btn').forEach((b,i) =>
-    b.classList.toggle('active', (i===0&&v==='total')||(i===1&&v==='activos')));
-  renderChart();
-}
-
+// ── CHART UNIFICADA ───────────────────────────────────────────────────────────
 function renderChart() {
   const ctx = document.getElementById('chart').getContext('2d');
   if (chartInstance) chartInstance.destroy();
-  let datasets = [];
+  const datasets = [];
 
-  if (chartView === 'total') {
-    const vs=[], cs=[];
-    MONTHS.forEach((mk,i) => {
-      const has = state.assets.some(a => isActive(a,i) && (state.data[mk]?.[a.id]?.valor||0)>0);
-      let tv=0, tc=0;
-      state.assets.forEach(a => {
-        if (!isActive(a,i)) return;
-        if (has) tv += state.data[mk]?.[a.id]?.valor||0;
-        tc += getCapital(a,i);
-      });
-      vs.push(has?tv:null); cs.push(tc);
-    });
-    datasets = [
-      { label:'Valor total', data:vs, borderColor:'#c8f135', backgroundColor:'rgba(200,241,53,0.07)', borderWidth:2, pointRadius:vs.map(v=>v!==null?4:0), pointBackgroundColor:'#c8f135', tension:0.35, fill:true, spanGaps:false },
-      { label:'Capital', data:cs, borderColor:'#2e3a4a', backgroundColor:'transparent', borderWidth:1.5, borderDash:[4,4], pointRadius:0, tension:0.35, fill:false }
-    ];
-    document.getElementById('chart-title').textContent = 'Valor vs Capital — 2025';
-    document.getElementById('chart-legend').innerHTML = `
-      <span><span class="legend-dot" style="background:#c8f135"></span>Valor total</span>
-      <span><span class="legend-dot" style="background:#2e3a4a;outline:1px dashed #5a6478;border-radius:50%"></span>Capital</span>`;
-  } else {
+  // Serie valor total (línea principal, gruesa, relleno sutil)
+  const vs = [], cs = [];
+  MONTHS.forEach((mk, i) => {
+    const has = state.assets.some(a => isActive(a,i) && (state.data[mk]?.[a.id]?.valor||0) > 0);
+    let tv = 0, tc = 0;
     state.assets.forEach(a => {
-      const series = MONTHS.map((mk,i) => {
-        if (!isActive(a,i)) return null;
-        const v = state.data[mk]?.[a.id]?.valor||0;
-        return v > 0 ? v : null;
-      });
-      datasets.push({ label:a.name, data:series, borderColor:a.color, backgroundColor:a.color+'15', borderWidth:2, pointRadius:series.map(v=>v!==null?4:0), pointBackgroundColor:a.color, tension:0.35, fill:false, spanGaps:false });
+      if (!isActive(a,i)) return;
+      if (has) tv += state.data[mk]?.[a.id]?.valor || 0;
+      tc += getCapital(a, i);
     });
-    document.getElementById('chart-title').textContent = 'Evolución por activo — 2025';
-    document.getElementById('chart-legend').innerHTML = state.assets.map(a =>
-      `<span><span class="legend-dot" style="background:${a.color}"></span>${a.name}</span>`).join('');
-  }
+    vs.push(has ? tv : null);
+    cs.push(tc > 0 ? tc : null);
+  });
+
+  datasets.push({
+    label: 'Valor total',
+    data: vs,
+    borderColor: '#c8f135',
+    backgroundColor: 'rgba(200,241,53,0.06)',
+    borderWidth: 2.5,
+    pointRadius: vs.map(v => v !== null ? 4 : 0),
+    pointBackgroundColor: '#c8f135',
+    tension: 0.35,
+    fill: true,
+    spanGaps: false,
+    order: 0
+  });
+
+  // Serie capital total (referencia punteada)
+  datasets.push({
+    label: 'Capital total',
+    data: cs,
+    borderColor: '#3a4a5c',
+    backgroundColor: 'transparent',
+    borderWidth: 1.5,
+    borderDash: [5, 5],
+    pointRadius: 0,
+    tension: 0.35,
+    fill: false,
+    spanGaps: true,
+    order: 1
+  });
+
+  // Series por activo (líneas finas, semitransparentes)
+  state.assets.forEach((a, idx) => {
+    const series = MONTHS.map((mk, i) => {
+      if (!isActive(a, i)) return null;
+      const v = state.data[mk]?.[a.id]?.valor || 0;
+      return v > 0 ? v : null;
+    });
+    datasets.push({
+      label: a.name,
+      data: series,
+      borderColor: a.color,
+      backgroundColor: 'transparent',
+      borderWidth: 1.5,
+      borderDash: [],
+      pointRadius: series.map(v => v !== null ? 3 : 0),
+      pointBackgroundColor: a.color,
+      tension: 0.35,
+      fill: false,
+      spanGaps: false,
+      order: idx + 2
+    });
+  });
+
+  // Leyenda
+  document.getElementById('chart-legend').innerHTML =
+    `<span><span class="legend-dot" style="background:#c8f135"></span>Total</span>` +
+    `<span><span class="legend-dot" style="background:#3a4a5c;outline:1px dashed #5a6478;border-radius:50%"></span>Capital</span>` +
+    state.assets.map(a =>
+      `<span><span class="legend-dot" style="background:${a.color}"></span>${a.name}</span>`
+    ).join('');
 
   chartInstance = new Chart(ctx, {
-    type:'line', data:{ labels:MONTHS, datasets },
-    options:{
-      responsive:true, interaction:{mode:'index',intersect:false},
-      plugins:{
-        legend:{display:false},
-        tooltip:{
-          backgroundColor:'#181d23', borderColor:'#2a3240', borderWidth:1,
-          titleColor:'#5a6478', bodyColor:'#e8eaed', padding:12,
-          titleFont:{ family:"'Plus Jakarta Sans', sans-serif", size:11 },
-          bodyFont:{ family:"'Plus Jakarta Sans', sans-serif", size:12 },
-          callbacks:{ label: ctx => ` ${ctx.dataset.label}: ${ctx.parsed.y!==null?fmt(ctx.parsed.y):'Sin datos'}` }
+    type: 'line',
+    data: { labels: MONTHS, datasets },
+    options: {
+      responsive: true,
+      interaction: { mode: 'index', intersect: false },
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          backgroundColor: '#181d23',
+          borderColor: '#2a3240',
+          borderWidth: 1,
+          titleColor: '#5a6478',
+          bodyColor: '#e8eaed',
+          padding: 12,
+          titleFont: { family: "'Plus Jakarta Sans', sans-serif", size: 11 },
+          bodyFont: { family: "'Plus Jakarta Sans', sans-serif", size: 12 },
+          callbacks: {
+            label: ctx => {
+              if (ctx.parsed.y === null) return null;
+              return ` ${ctx.dataset.label}: ${fmt(ctx.parsed.y)}`;
+            }
+          }
         }
       },
-      scales:{
-        x:{ grid:{color:'rgba(255,255,255,0.03)'}, ticks:{color:'#5a6478', font:{family:"'Plus Jakarta Sans', sans-serif", size:11}} },
-        y:{ grid:{color:'rgba(255,255,255,0.04)'}, ticks:{color:'#5a6478', font:{family:"'Plus Jakarta Sans', sans-serif", size:11}, callback: v => '€\u202f' + fmtShort(v)} }
+      scales: {
+        x: {
+          grid: { color: 'rgba(255,255,255,0.03)' },
+          ticks: { color: '#5a6478', font: { family: "'Plus Jakarta Sans', sans-serif", size: 11 } }
+        },
+        y: {
+          grid: { color: 'rgba(255,255,255,0.04)' },
+          ticks: {
+            color: '#5a6478',
+            font: { family: "'Plus Jakarta Sans', sans-serif", size: 11 },
+            callback: v => '€ ' + fmtShort(v)
+          }
+        }
       }
     }
   });
+}
+
+// ── INFLACIÓN ────────────────────────────────────────────────────────────────
+function renderInflation() {
+  const li = latestMonthIdx();
+  if (li === -1) return;
+  const mk = MONTHS[li];
+  let tv = 0;
+  state.assets.forEach(a => {
+    if (!isActive(a, li)) return;
+    tv += state.data[mk]?.[a.id]?.valor || 0;
+  });
+  if (tv === 0) return;
+  const rate = parseFloat(document.getElementById('inflation-input')?.value) || 3;
+  const realValue = tv / (1 + rate / 100);
+  const loss = realValue - tv;
+  document.getElementById('hero-inflation').textContent = fmt(realValue);
+  document.getElementById('hero-inflation-sub').textContent =
+    `pérdida real estimada: ${fmt(loss)} (${fmtPct(-(rate))})`;
 }
 
 // ── MODAL ─────────────────────────────────────────────────────────────────────
@@ -1027,15 +1049,6 @@ function exportData() {
   toast('✓ CSV descargado');
 }
 
-// ── TOGGLE ENTRY PANEL ───────────────────────────────────────────────────────
-function toggleEntry() {
-  const panel = document.getElementById('entry-panel');
-  const chevron = document.getElementById('entry-chevron');
-  const open = panel.style.display !== 'none';
-  panel.style.display = open ? 'none' : 'block';
-  chevron.style.transform = open ? 'rotate(0deg)' : 'rotate(180deg)';
-}
-
 // ── INIT: carga datos.json ────────────────────────────────────────────────────
 async function init() {
   try {
@@ -1050,8 +1063,6 @@ async function init() {
     document.getElementById('hero-capital-sub').textContent =
       '⚠ No se encontró datos.json — súbelo a GitHub junto al index.html';
   }
-  renderMonthSelector();
-  renderEntryFields();
   render();
 }
 
