@@ -595,6 +595,11 @@
       <div class="card-value" id="hero-ganancia">—</div>
       <div id="hero-badge"></div>
     </div>
+    <div class="hero-card">
+      <div class="card-label">Rentabilidad acum.</div>
+      <div class="card-value" id="hero-rent">—</div>
+      <div class="card-sub">sobre capital total</div>
+    </div>
     <div class="hero-card" id="card-inflation">
       <div class="card-label" style="display:flex;align-items:center;justify-content:space-between">
         <span>Poder adquisitivo en 1 año</span>
@@ -606,12 +611,7 @@
         </span>
       </div>
       <div class="card-value negative" id="hero-inflation">—</div>
-      <div class="card-sub" id="hero-inflation-sub">equivale en valor real</div>
-    </div>
-    <div class="hero-card">
-      <div class="card-label">Rentabilidad acum.</div>
-      <div class="card-value" id="hero-rent">—</div>
-      <div class="card-sub">sobre capital total</div>
+      <div class="card-sub" id="hero-inflation-sub">capital equivalente en valor real</div>
     </div>
   </div>
 
@@ -976,9 +976,9 @@ function renderInflation() {
   const rate = parseFloat(document.getElementById('inflation-input')?.value) || 3;
   const realValue = tv / (1 + rate / 100);
   const loss = realValue - tv;
-  document.getElementById('hero-inflation').textContent = fmt(realValue);
+  document.getElementById('hero-inflation').textContent = fmt(loss);
   document.getElementById('hero-inflation-sub').textContent =
-    `pérdida real estimada: ${fmt(loss)} (${fmtPct(-(rate))})`;
+    `capital equivalente: ${fmt(realValue)}`;
 }
 
 // ── MODAL ─────────────────────────────────────────────────────────────────────
