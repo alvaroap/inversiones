@@ -808,9 +808,19 @@ function getCapital(asset, upToIdx) {
 
 function latestMonthIdx() {
   for (let i = 11; i >= 0; i--) {
-    if (state.assets.some(a => (state.data[MONTHS[i]]?.[a.id]?.valor || 0) > 0)) return i;
+    const mk = MONTHS[i];
+    const hasValor = state.assets.some(a => isActive(a,i) && (state.data[mk]?.[a.id]?.valor || 0) > 0);
+    const hasApor  = state.assets.some(a => isActive(a,i) && (state.data[mk]?.[a.id]?.aportacion || 0) > 0);
+    if (hasValor || hasApor) return i;
   }
   return -1;
+}
+
+// Activo con datos: tiene valor, o capital inicial + aportaciones > 0
+function assetHasData(asset, mIdx) {
+  const valor = state.data[MONTHS[mIdx]]?.[asset.id]?.valor || 0;
+  if (valor > 0) return true;
+  return getCapital(asset, mIdx) > 0;
 }
 
 // ── ENTRY FIELDS ─────────────────────────────────────────────────────────────
@@ -895,7 +905,7 @@ function render() {
       const c = getCapital(a,li);
       const g2 = v - c;
       const p = c>0 ? (g2/c)*100 : 0;
-      const has = active && v > 0;
+      const has = active && assetHasData(a, li);
       const period = (a.startMonth>0||a.endMonth<11) ? `${MONTHS[a.startMonth]}–${MONTHS[a.endMonth]}` : '';
       return `
         <div class="asset-row" style="opacity:${active?1:0.38}">
