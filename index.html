@@ -303,6 +303,84 @@
     vertical-align: middle;
   }
   canvas { width: 100% !important; }
+  /* APORTACIONES TABLE */
+  .apor-wrap {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px;
+    margin-top: 8px;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  .apor-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: var(--font);
+    font-size: 0.75rem;
+    min-width: 400px;
+  }
+  .apor-table th {
+    font-weight: 400;
+    font-size: 0.6rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--muted);
+    text-align: right;
+    padding: 0 10px 10px;
+    border-bottom: 1px solid var(--border);
+    white-space: nowrap;
+  }
+  .apor-table th:first-child { text-align: left; padding-left: 0; }
+  .apor-table td {
+    text-align: right;
+    padding: 9px 10px;
+    border-bottom: 1px solid rgba(30,37,48,0.6);
+    color: var(--text);
+    white-space: nowrap;
+  }
+  .apor-table td:first-child {
+    text-align: left;
+    padding-left: 0;
+    color: var(--muted);
+    font-size: 0.68rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+  .apor-table tr:last-child td { border-bottom: none; }
+  .apor-table .apor-zero { color: var(--border); }
+  .apor-table .apor-val { color: var(--accent); font-weight: 400; }
+  .apor-table .apor-total {
+    color: var(--text);
+    font-weight: 400;
+    border-left: 1px solid var(--border);
+    padding-left: 14px;
+  }
+  .apor-table .apor-acum {
+    color: var(--muted);
+    font-size: 0.68rem;
+  }
+  .apor-table tfoot td {
+    border-top: 1px solid var(--border);
+    border-bottom: none;
+    padding-top: 10px;
+    font-weight: 400;
+    color: var(--muted);
+    font-size: 0.68rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+  .apor-table tfoot .apor-total { color: var(--accent); font-size: 0.75rem; }
+  .apor-dot {
+    display: inline-block;
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    margin-right: 5px;
+    vertical-align: middle;
+    flex-shrink: 0;
+  }
+
+
 
   .btn-action {
     background: var(--accent-dim);
@@ -618,6 +696,9 @@
   <div class="section-title">Activos</div>
   <div class="assets" id="assets-list"></div>
 
+  <div class="section-title">Aportaciones</div>
+  <div class="apor-wrap" id="apor-wrap"></div>
+
   <div class="section-title">Evolución</div>
   <div class="chart-wrap">
     <div class="chart-header">
@@ -837,6 +918,7 @@ function render() {
 
   renderChart();
   renderInflation();
+  renderAportaciones();
 }
 
 // ── CHART UNIFICADA ───────────────────────────────────────────────────────────
@@ -960,6 +1042,67 @@ function renderChart() {
       }
     }
   });
+}
+
+// ── APORTACIONES ─────────────────────────────────────────────────────────────
+function renderAportaciones() {
+  const wrap = document.getElementById('apor-wrap');
+  if (!wrap) return;
+
+  // Activos activos (con al menos una aportación > 0 en algún mes)
+  const activos = state.assets.filter(a =>
+    MONTHS.some(mk => (state.data[mk]?.[a.id]?.aportacion || 0) > 0)
+  );
+
+  // Meses con al menos una aportación
+  const mesesConApor = MONTHS.filter(mk =>
+    state.assets.some(a => (state.data[mk]?.[a.id]?.aportacion || 0) > 0)
+  );
+
+  if (mesesConApor.length === 0 || activos.length === 0) {
+    wrap.innerHTML = '<div style="padding:16px;font-size:0.75rem;color:var(--muted)">Sin aportaciones registradas aún.</div>';
+    return;
+  }
+
+  // Totales por activo (columna footer)
+  const totalPorActivo = {};
+  activos.forEach(a => {
+    totalPorActivo[a.id] = MONTHS.reduce((s, mk) => s + (state.data[mk]?.[a.id]?.aportacion || 0), 0);
+  });
+
+  // Acumulado global por mes
+  let acumGlobal = 0;
+
+  const thead = `<thead><tr>
+    <th>Mes</th>
+    ${activos.map(a => `<th><span class="apor-dot" style="background:${a.color}"></span>${a.nombre || a.name}</th>`).join('')}
+    <th class="apor-total">Total mes</th>
+    <th class="apor-acum">Acumulado</th>
+  </tr></thead>`;
+
+  const tbody = mesesConApor.map(mk => {
+    const totalMes = activos.reduce((s, a) => s + (state.data[mk]?.[a.id]?.aportacion || 0), 0);
+    acumGlobal += totalMes;
+    const celdas = activos.map(a => {
+      const v = state.data[mk]?.[a.id]?.aportacion || 0;
+      return `<td class="${v > 0 ? 'apor-val' : 'apor-zero'}">${v > 0 ? fmt(v) : '—'}</td>`;
+    }).join('');
+    return `<tr>
+      <td>${mk}</td>
+      ${celdas}
+      <td class="apor-total">${fmt(totalMes)}</td>
+      <td class="apor-acum">${fmt(acumGlobal)}</td>
+    </tr>`;
+  }).join('');
+
+  const tfoot = `<tfoot><tr>
+    <td>Total</td>
+    ${activos.map(a => `<td class="apor-val">${fmt(totalPorActivo[a.id])}</td>`).join('')}
+    <td class="apor-total">${fmt(acumGlobal)}</td>
+    <td class="apor-acum"></td>
+  </tr></tfoot>`;
+
+  wrap.innerHTML = `<table class="apor-table">${thead}<tbody>${tbody}</tbody>${tfoot}</table>`;
 }
 
 // ── INFLACIÓN ────────────────────────────────────────────────────────────────
