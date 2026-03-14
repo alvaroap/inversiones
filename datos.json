@@ -109,23 +109,23 @@
     },
     "Mar": {
       "bbva": {
-        "valor": 13873,
+        "valor": 13237,
         "aportacion": 5000
       },
       "vanguard": {
-        "valor": 1576,
-        "aportacion": 1600
+        "valor": 7163,
+        "aportacion": 0
       },
       "quality": {
-        "valor": 2152,
+        "valor": 2133,
         "aportacion": 0
       },
       "redeia": {
-        "valor": 1817,
+        "valor": 1835,
         "aportacion": 0
       },
       "mega": {
-        "valor": 5680,
+        "valor": 5701,
         "aportacion": 300
       }
     },
