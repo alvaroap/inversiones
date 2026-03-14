@@ -303,6 +303,23 @@
     vertical-align: middle;
   }
   canvas { width: 100% !important; }
+  .apor-leyenda {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px 16px;
+    margin-top: 14px;
+    padding-top: 12px;
+    border-top: 1px solid var(--border);
+  }
+  .apor-leyenda-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-family: var(--font);
+    font-size: 0.68rem;
+    color: var(--muted);
+    white-space: nowrap;
+  }
   /* APORTACIONES TABLE */
   .apor-wrap {
     background: var(--surface);
@@ -1083,9 +1100,17 @@ function renderAportaciones() {
   // Acumulado global por mes
   let acumGlobal = 0;
 
+  // Leyenda de colores debajo de la tabla
+  const leyenda = `<div class="apor-leyenda">${activos.map(a =>
+    `<span class="apor-leyenda-item">
+      <span class="apor-dot" style="background:${a.color};width:8px;height:8px"></span>
+      ${a.nombre || a.name}
+    </span>`
+  ).join('')}</div>`;
+
   const thead = `<thead><tr>
     <th>Mes</th>
-    ${activos.map(a => `<th><span class="apor-dot" style="background:${a.color}"></span>${a.nombre || a.name}</th>`).join('')}
+    ${activos.map(a => `<th><span style="display:inline-block;width:12px;height:12px;border-radius:50%;background:${a.color};vertical-align:middle"></span></th>`).join('')}
     <th class="apor-total">Total mes</th>
     <th class="apor-acum">Acumulado</th>
   </tr></thead>`;
@@ -1112,7 +1137,7 @@ function renderAportaciones() {
     <td class="apor-acum"></td>
   </tr></tfoot>`;
 
-  wrap.innerHTML = `<table class="apor-table">${thead}<tbody>${tbody}</tbody>${tfoot}</table>`;
+  wrap.innerHTML = `<table class="apor-table">${thead}<tbody>${tbody}</tbody>${tfoot}</table>` + leyenda;
 }
 
 // ── INFLACIÓN ────────────────────────────────────────────────────────────────
