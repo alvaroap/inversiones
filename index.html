@@ -309,91 +309,98 @@
     background: var(--surface);
     border: 1px solid var(--border);
     border-radius: 12px;
-    padding: 20px;
     margin-top: 8px;
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
+    overflow: hidden;
   }
+  .apor-head { padding: 16px 20px; }
+  .apor-anual-label {
+    font-size: 0.6rem; text-transform: uppercase;
+    letter-spacing: 0.1em; color: var(--muted); margin-bottom: 3px;
+  }
+  .apor-anual-total { font-size: 1.45rem; font-weight: 400; color: var(--text); }
+  .apor-divider { height: 1px; background: var(--border); }
+  .apor-mes-resumen {
+    padding: 14px 20px;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .apor-mes-nombre {
+    font-size: 0.65rem; color: var(--muted);
+    text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 6px;
+  }
+  .apor-chips { display: flex; gap: 6px; flex-wrap: wrap; }
+  .apor-chip {
+    display: flex; align-items: center; gap: 5px;
+    background: var(--surface2); border: 1px solid var(--border);
+    border-radius: 6px; padding: 4px 9px;
+  }
+  .apor-chip-val { font-size: 0.75rem; color: var(--accent); }
+  .apor-mes-total { font-size: 0.88rem; color: var(--text); text-align: right; }
+  .apor-mes-label {
+    font-size: 0.58rem; color: var(--muted); text-align: right;
+    margin-top: 2px; text-transform: uppercase; letter-spacing: 0.06em;
+  }
+  .apor-legend {
+    display: flex; flex-wrap: wrap; gap: 4px 14px;
+    padding: 10px 20px; border-top: 1px solid var(--border);
+  }
+  .apor-legend span {
+    display: flex; align-items: center; gap: 5px;
+    font-size: 0.68rem; color: var(--muted); white-space: nowrap;
+  }
+  .apor-dot {
+    display: inline-block; width: 7px; height: 7px;
+    border-radius: 50%; flex-shrink: 0; vertical-align: middle;
+  }
+  .apor-toggle {
+    width: 100%; display: flex; align-items: center; justify-content: center;
+    padding: 13px 20px; border: none; background: transparent;
+    border-top: 1px solid var(--border); cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .apor-chevron {
+    width: 28px; height: 28px; display: flex; align-items: center; justify-content: center;
+    border: 1px solid #2e3a4a; border-radius: 6px; background: #1e2530;
+    transition: transform 0.22s;
+  }
+  .apor-chevron.open { transform: rotate(180deg); }
+  .apor-detalle { display: none; }
+  .apor-detalle.visible { display: block; }
   .apor-table {
-    width: 100%;
-    border-collapse: collapse;
-    font-family: var(--font);
-    font-size: 0.75rem;
-    min-width: 400px;
+    width: 100%; border-collapse: collapse;
+    font-family: var(--font); font-size: 0.74rem;
   }
   .apor-table th {
-    font-weight: 400;
-    font-size: 0.6rem;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    color: var(--muted);
-    text-align: right;
-    padding: 0 10px 10px;
-    border-bottom: 1px solid var(--border);
-    white-space: nowrap;
+    font-weight: 400; font-size: 0.58rem; text-transform: uppercase;
+    letter-spacing: 0.1em; color: var(--muted); text-align: right;
+    padding: 10px 10px 8px; border-bottom: 1px solid var(--border); white-space: nowrap;
   }
-  .apor-table th:first-child { text-align: left; padding-left: 0; }
+  .apor-table th:first-child { text-align: left; padding-left: 20px; }
+  .apor-table th:last-child { padding-right: 20px; }
   .apor-table td {
-    text-align: right;
-    padding: 9px 10px;
-    border-bottom: 1px solid rgba(30,37,48,0.6);
-    color: var(--text);
-    white-space: nowrap;
+    text-align: right; padding: 8px 10px;
+    border-bottom: 1px solid rgba(30,37,48,0.5);
+    color: var(--text); white-space: nowrap;
   }
   .apor-table td:first-child {
-    text-align: left;
-    padding-left: 0;
-    color: var(--muted);
-    font-size: 0.68rem;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
+    text-align: left; padding-left: 20px;
+    color: var(--muted); font-size: 0.65rem;
+    text-transform: uppercase; letter-spacing: 0.08em;
   }
+  .apor-table td:last-child { padding-right: 20px; }
   .apor-table tr:last-child td { border-bottom: none; }
   .apor-table .apor-zero { color: var(--border); }
   .apor-table .apor-val { color: var(--accent); font-weight: 400; }
   .apor-table .apor-total {
-    color: var(--text);
-    font-weight: 400;
-    border-left: 1px solid var(--border);
-    padding-left: 14px;
-  }
-  .apor-table .apor-acum {
-    color: var(--muted);
-    font-size: 0.68rem;
+    color: var(--text); font-weight: 400;
+    border-left: 1px solid var(--border); padding-left: 14px;
   }
   .apor-table tfoot td {
-    border-top: 1px solid var(--border);
-    border-bottom: none;
-    padding-top: 10px;
-    font-weight: 400;
-    color: var(--muted);
-    font-size: 0.68rem;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
+    border-top: 1px solid var(--border); border-bottom: none;
+    padding-top: 10px; padding-bottom: 14px;
+    font-weight: 400; color: var(--muted); font-size: 0.65rem;
+    text-transform: uppercase; letter-spacing: 0.08em;
   }
   .apor-table tfoot .apor-total { color: var(--accent); font-size: 0.75rem; }
-  .apor-dot {
-    display: inline-block;
-    width: 6px; height: 6px;
-    border-radius: 50%;
-    margin-right: 5px;
-    vertical-align: middle;
-    flex-shrink: 0;
-  }
-  .apor-legend {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 4px 16px;
-    margin-top: 12px;
-    padding: 0 2px;
-  }
-  .apor-legend span {
-    display: flex;
-    align-items: center;
-    font-size: 0.7rem;
-    color: var(--muted);
-    white-space: nowrap;
-  }
 
 
 
@@ -1077,12 +1084,9 @@ function renderAportaciones() {
   const wrap = document.getElementById('apor-wrap');
   if (!wrap) return;
 
-  // Activos activos (con al menos una aportación > 0 en algún mes)
   const activos = state.assets.filter(a =>
     MONTHS.some(mk => (state.data[mk]?.[a.id]?.aportacion || 0) > 0)
   );
-
-  // Meses con al menos una aportación
   const mesesConApor = MONTHS.filter(mk =>
     state.assets.some(a => (state.data[mk]?.[a.id]?.aportacion || 0) > 0)
   );
@@ -1092,46 +1096,85 @@ function renderAportaciones() {
     return;
   }
 
-  // Totales por activo (columna footer)
+  // Totales
   const totalPorActivo = {};
   activos.forEach(a => {
     totalPorActivo[a.id] = MONTHS.reduce((s, mk) => s + (state.data[mk]?.[a.id]?.aportacion || 0), 0);
   });
+  const totalAnual = Object.values(totalPorActivo).reduce((s, v) => s + v, 0);
 
-  // Acumulado global por mes
-  let acumGlobal = 0;
+  // Último mes con aportación
+  const ultimoMk = mesesConApor[mesesConApor.length - 1];
+  const activosUltimoMes = activos.filter(a => (state.data[ultimoMk]?.[a.id]?.aportacion || 0) > 0);
+  const totalUltimoMes = activosUltimoMes.reduce((s, a) => s + (state.data[ultimoMk]?.[a.id]?.aportacion || 0), 0);
 
+  const chipsHtml = activosUltimoMes.map(a => {
+    const v = state.data[ultimoMk]?.[a.id]?.aportacion || 0;
+    return `<div class="apor-chip"><span class="apor-dot" style="background:${a.color}"></span><span class="apor-chip-val">${fmt(v)}</span></div>`;
+  }).join('');
+
+  const legendaHtml = activos.map(a =>
+    `<span><span class="apor-dot" style="background:${a.color};margin-right:5px"></span>${a.nombre || a.name}</span>`
+  ).join('');
+
+  // Tabla detalle
+  let totalAcum = 0;
   const thead = `<thead><tr>
     <th>Mes</th>
     ${activos.map(a => `<th><span class="apor-dot" style="background:${a.color}"></span></th>`).join('')}
-    <th class="apor-total">Total mes</th>
-    <th class="apor-acum">Acumulado</th>
+    <th class="apor-total">Total</th>
   </tr></thead>`;
 
   const tbody = mesesConApor.map(mk => {
     const totalMes = activos.reduce((s, a) => s + (state.data[mk]?.[a.id]?.aportacion || 0), 0);
-    acumGlobal += totalMes;
+    totalAcum += totalMes;
     const celdas = activos.map(a => {
       const v = state.data[mk]?.[a.id]?.aportacion || 0;
       return `<td class="${v > 0 ? 'apor-val' : 'apor-zero'}">${v > 0 ? fmt(v) : '—'}</td>`;
     }).join('');
-    return `<tr>
-      <td>${mk}</td>
-      ${celdas}
-      <td class="apor-total">${fmt(totalMes)}</td>
-      <td class="apor-acum">${fmt(acumGlobal)}</td>
-    </tr>`;
+    return `<tr><td>${mk}</td>${celdas}<td class="apor-total">${fmt(totalMes)}</td></tr>`;
   }).join('');
 
   const tfoot = `<tfoot><tr>
     <td>Total</td>
     ${activos.map(a => `<td class="apor-val">${fmt(totalPorActivo[a.id])}</td>`).join('')}
-    <td class="apor-total">${fmt(acumGlobal)}</td>
-    <td class="apor-acum"></td>
+    <td class="apor-total">${fmt(totalAcum)}</td>
   </tr></tfoot>`;
 
-  wrap.innerHTML = `<table class="apor-table">${thead}<tbody>${tbody}</tbody>${tfoot}</table>
-    <div class="apor-legend">${activos.map(a => `<span><span class="apor-dot" style="background:${a.color}"></span>${a.nombre || a.name}</span>`).join('')}</div>`;
+  wrap.innerHTML = `
+    <div class="apor-head">
+      <div class="apor-anual-label">Aportaciones ${new Date().getFullYear()}</div>
+      <div class="apor-anual-total">${fmt(totalAnual)}</div>
+    </div>
+    <div class="apor-divider"></div>
+    <div class="apor-mes-resumen">
+      <div>
+        <div class="apor-mes-nombre">${ultimoMk} · último mes</div>
+        <div class="apor-chips">${chipsHtml}</div>
+      </div>
+      <div>
+        <div class="apor-mes-total">${fmt(totalUltimoMes)}</div>
+        <div class="apor-mes-label">este mes</div>
+      </div>
+    </div>
+    <div class="apor-legend">${legendaHtml}</div>
+    <button class="apor-toggle" onclick="toggleApor()">
+      <div class="apor-chevron" id="apor-chev">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+          <path d="M3 5L7 9L11 5" stroke="#9aaabf" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+    </button>
+    <div class="apor-detalle" id="apor-detalle">
+      <table class="apor-table">${thead}<tbody>${tbody}</tbody>${tfoot}</table>
+    </div>`;
+}
+
+function toggleApor() {
+  const det = document.getElementById('apor-detalle');
+  const chev = document.getElementById('apor-chev');
+  const open = det.classList.toggle('visible');
+  chev.classList.toggle('open', open);
 }
 
 // ── INFLACIÓN ────────────────────────────────────────────────────────────────
