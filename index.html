@@ -1178,7 +1178,7 @@ function renderInflation() {
   const loss = tc * (rate / 100);
   const net = tc - loss;
   document.getElementById('hero-inflation').textContent = fmt(-loss);
-  document.getElementById('hero-inflation-sub').textContent = `${fmt(tc)} vs ${fmt(net)}`;
+  document.getElementById('hero-inflation-sub').textContent = `${fmt(tc)}  vs  ${fmt(net)}`;
 }
 
 // ── MODAL ─────────────────────────────────────────────────────────────────────
