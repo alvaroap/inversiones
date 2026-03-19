@@ -913,7 +913,7 @@ function render() {
 
     document.getElementById('hero-valor').textContent = fmt(tv);
     document.getElementById('hero-valor').className = 'card-value neutral';
-    document.getElementById('hero-capital-sub').textContent = `Capital invertido: ${fmt(tc)}`;
+    document.getElementById('hero-capital-sub').textContent = `Invertido: ${fmt(tc)}`;
     document.getElementById('hero-ganancia').textContent = (g>=0?'+':'') + fmt(g);
     document.getElementById('hero-ganancia').className = `card-value ${g>=0?'positive':'negative'}`;
     document.getElementById('hero-badge').innerHTML = `<div class="badge ${g>=0?'up':'down'}">${g>=0?'▲':'▼'} ${fmtPct(Math.abs(r))}</div>`;
@@ -1178,7 +1178,7 @@ function renderInflation() {
   const loss = tc * (rate / 100);
   const net = tc - loss;
   document.getElementById('hero-inflation').textContent = fmt(-loss);
-  document.getElementById('hero-inflation-sub').textContent = `capital: ${fmt(tc)} · neto: ${fmt(net)}`;
+  document.getElementById('hero-inflation-sub').textContent = `${fmt(tc)} vs ${fmt(net)}`;
 }
 
 // ── MODAL ─────────────────────────────────────────────────────────────────────
