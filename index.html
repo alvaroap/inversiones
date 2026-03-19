@@ -807,7 +807,7 @@ const fmtNum = (n, decimals = 0) => {
 };
 
 const fmt = n => fmtNum(n, 0) + ' €';
-const fmtShort = n => fmtNum(n, 0);
+const fmtShort = n => Math.abs(n) >= 1000 ? (n/1000).toFixed(n % 1000 === 0 ? 0 : 1) + 'k' : fmtNum(n, 0);
 
 const fmtPct = n => {
   const abs = Math.abs(n);
@@ -1178,7 +1178,7 @@ function renderInflation() {
   const loss = tc * (rate / 100);
   const net = tc - loss;
   document.getElementById('hero-inflation').textContent = fmt(-loss);
-  document.getElementById('hero-inflation-sub').textContent = `${fmt(tc)}  vs  ${fmt(net)}`;
+  document.getElementById('hero-inflation-sub').textContent = `${fmt(tc)}   vs   ${fmt(net)}`;
 }
 
 // ── MODAL ─────────────────────────────────────────────────────────────────────
