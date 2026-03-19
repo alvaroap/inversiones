@@ -219,7 +219,7 @@
     font-family: var(--font);
     font-weight: 300;
     font-size: 0.8rem;
-    color: var(--muted);
+    color: #ffffff;
     text-align: right;
   }
   .asset-nums { display: contents; }
@@ -379,6 +379,20 @@
     margin-right: 5px;
     vertical-align: middle;
     flex-shrink: 0;
+  }
+  .apor-legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px 16px;
+    margin-top: 12px;
+    padding: 0 2px;
+  }
+  .apor-legend span {
+    display: flex;
+    align-items: center;
+    font-size: 0.7rem;
+    color: var(--muted);
+    white-space: nowrap;
   }
 
 
@@ -1089,7 +1103,7 @@ function renderAportaciones() {
 
   const thead = `<thead><tr>
     <th>Mes</th>
-    ${activos.map(a => `<th><span class="apor-dot" style="background:${a.color}"></span>${a.nombre || a.name}</th>`).join('')}
+    ${activos.map(a => `<th><span class="apor-dot" style="background:${a.color}"></span></th>`).join('')}
     <th class="apor-total">Total mes</th>
     <th class="apor-acum">Acumulado</th>
   </tr></thead>`;
@@ -1116,7 +1130,8 @@ function renderAportaciones() {
     <td class="apor-acum"></td>
   </tr></tfoot>`;
 
-  wrap.innerHTML = `<table class="apor-table">${thead}<tbody>${tbody}</tbody>${tfoot}</table>`;
+  wrap.innerHTML = `<table class="apor-table">${thead}<tbody>${tbody}</tbody>${tfoot}</table>
+    <div class="apor-legend">${activos.map(a => `<span><span class="apor-dot" style="background:${a.color}"></span>${a.nombre || a.name}</span>`).join('')}</div>`;
 }
 
 // ── INFLACIÓN ────────────────────────────────────────────────────────────────
