@@ -193,7 +193,7 @@
   .asset-name {
     font-family: var(--font);
     font-weight: 400;
-    font-size: 0.82rem;
+    font-size: 0.95rem;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -201,7 +201,7 @@
   .asset-ticker {
     font-family: var(--font);
     font-weight: 300;
-    font-size: 0.63rem;
+    font-size: 0.73rem;
     color: var(--muted);
     margin-top: 2px;
     white-space: nowrap;
@@ -211,21 +211,21 @@
   .asset-period {
     font-family: var(--font);
     font-weight: 300;
-    font-size: 0.6rem;
+    font-size: 0.68rem;
     color: #3a4a5a;
     margin-top: 1px;
   }
   .asset-capital {
     font-family: var(--font);
     font-weight: 300;
-    font-size: 0.72rem;
+    font-size: 0.82rem;
     color: var(--muted);
     text-align: right;
   }
   .asset-nums { display: contents; }
   .asset-ganancia {
     font-family: var(--font);
-    font-size: 0.88rem;
+    font-size: 1rem;
     font-weight: 600;
     text-align: right;
     white-space: nowrap;
@@ -233,10 +233,10 @@
   .asset-pct {
     font-family: var(--font);
     font-weight: 400;
-    font-size: 0.7rem;
+    font-size: 0.8rem;
     text-align: right;
     white-space: nowrap;
-    padding: 4px 8px;
+    padding: 4px 9px;
     border-radius: 6px;
     flex-shrink: 0;
   }
@@ -379,6 +379,20 @@
     margin-right: 5px;
     vertical-align: middle;
     flex-shrink: 0;
+  }
+  .apor-legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px 16px;
+    margin-top: 12px;
+    padding: 0 2px;
+  }
+  .apor-legend span {
+    display: flex;
+    align-items: center;
+    font-size: 0.7rem;
+    color: var(--muted);
+    white-space: nowrap;
   }
 
 
@@ -1091,7 +1105,7 @@ function renderAportaciones() {
 
   const thead = `<thead><tr>
     <th>Mes</th>
-    ${activos.map(a => `<th><span class="apor-dot" style="background:${a.color}"></span>${a.nombre || a.name}</th>`).join('')}
+    ${activos.map(a => `<th><span class="apor-dot" style="background:${a.color}"></span></th>`).join('')}
     <th class="apor-total">Total mes</th>
     <th class="apor-acum">Acumulado</th>
   </tr></thead>`;
@@ -1118,7 +1132,9 @@ function renderAportaciones() {
     <td class="apor-acum"></td>
   </tr></tfoot>`;
 
-  wrap.innerHTML = `<table class="apor-table">${thead}<tbody>${tbody}</tbody>${tfoot}</table>`;
+  const leyenda = `<div class="apor-legend">${activos.map(a => `<span><span class="apor-dot" style="background:${a.color}"></span>${a.nombre || a.name}</span>`).join('')}</div>`;
+
+  wrap.innerHTML = `<table class="apor-table">${thead}<tbody>${tbody}</tbody>${tfoot}</table>${leyenda}`;
 }
 
 // ── INFLACIÓN ────────────────────────────────────────────────────────────────
