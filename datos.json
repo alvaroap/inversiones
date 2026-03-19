@@ -88,7 +88,7 @@
     "Feb": {
       "bbva": {
         "valor": 9252,
-        "aportacion": 0
+        "aportacion": 5000
       },
       "vanguard": {
         "valor": 0,
@@ -104,17 +104,17 @@
       },
       "mega": {
         "valor": 5319,
-        "aportacion": 0
+        "aportacion": 300
       }
     },
     "Mar": {
       "bbva": {
         "valor": 13237,
-        "aportacion": 5000
+        "aportacion": 0
       },
       "vanguard": {
         "valor": 7163,
-        "aportacion": 0
+        "aportacion": 390
       },
       "quality": {
         "valor": 2133,
@@ -126,7 +126,7 @@
       },
       "mega": {
         "valor": 5701,
-        "aportacion": 300
+        "aportacion": 0
       }
     },
     "Abr": {
@@ -136,7 +136,7 @@
       },
       "vanguard": {
         "valor": 7204,
-        "aportacion": 390
+        "aportacion": 0
       },
       "quality": {
         "valor": 2101,
