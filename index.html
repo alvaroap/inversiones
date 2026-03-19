@@ -148,7 +148,7 @@
     padding: 3px 10px;
     border-radius: 99px;
     font-family: var(--font);
-    font-size: 0.68rem;
+    font-size: 1.2rem;
     font-weight: 400;
     margin-top: 10px;
   }
@@ -699,11 +699,7 @@
       <div class="card-value" id="hero-ganancia">—</div>
       <div id="hero-badge"></div>
     </div>
-    <div class="hero-card">
-      <div class="card-label">Rentabilidad acum.</div>
-      <div class="card-value" id="hero-rent">—</div>
 
-    </div>
     <div class="hero-card" id="card-inflation">
       <div class="card-label" style="display:flex;align-items:center;justify-content:space-between">
         <span>Poder adquisitivo en 1 año</span>
@@ -900,7 +896,7 @@ function render() {
   document.getElementById('header-count').textContent = `${state.assets.length} activos · 2025`;
 
   if (li === -1) {
-    ['hero-valor','hero-ganancia','hero-rent'].forEach(id => document.getElementById(id).textContent='—');
+    ['hero-valor','hero-ganancia'].forEach(id => document.getElementById(id).textContent='—');
     document.getElementById('hero-capital-sub').textContent = 'Introduce datos abajo para empezar';
     document.getElementById('last-update').textContent = 'Sin datos aún';
     document.getElementById('assets-list').innerHTML = '';
@@ -917,12 +913,10 @@ function render() {
 
     document.getElementById('hero-valor').textContent = fmt(tv);
     document.getElementById('hero-valor').className = 'card-value neutral';
-    document.getElementById('hero-capital-sub').textContent = `Invertido: ${fmt(tc)}`;
+    document.getElementById('hero-capital-sub').textContent = `Capital invertido: ${fmt(tc)}`;
     document.getElementById('hero-ganancia').textContent = (g>=0?'+':'') + fmt(g);
     document.getElementById('hero-ganancia').className = `card-value ${g>=0?'positive':'negative'}`;
-    document.getElementById('hero-badge').innerHTML = `<div class="badge ${g>=0?'up':'down'}">${g>=0?'▲':'▼'} ${fmtPct(Math.abs(r))} vs capital</div>`;
-    document.getElementById('hero-rent').textContent = (r>=0?'+':'') + fmtPct(r);
-    document.getElementById('hero-rent').className = `card-value ${r>=0?'positive':'negative'}`;
+    document.getElementById('hero-badge').innerHTML = `<div class="badge ${g>=0?'up':'down'}">${g>=0?'▲':'▼'} ${fmtPct(Math.abs(r))}</div>`;
     document.getElementById('last-update').textContent = `Actualizado: ${mk} 2025`;
 
     document.getElementById('assets-list').innerHTML = state.assets.map(a => {
@@ -1182,8 +1176,9 @@ function renderInflation() {
   if (tc === 0) return;
   const rate = parseFloat(document.getElementById('inflation-input')?.value) || 3;
   const loss = tc * (rate / 100);
+  const net = tc - loss;
   document.getElementById('hero-inflation').textContent = fmt(-loss);
-  document.getElementById('hero-inflation-sub').textContent = `capital: ${fmt(tc)}`;
+  document.getElementById('hero-inflation-sub').textContent = `capital: ${fmt(tc)} · neto: ${fmt(net)}`;
 }
 
 // ── MODAL ─────────────────────────────────────────────────────────────────────
