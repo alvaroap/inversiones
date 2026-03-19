@@ -193,7 +193,7 @@
   .asset-name {
     font-family: var(--font);
     font-weight: 400;
-    font-size: 0.95rem;
+    font-size: 0.82rem;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -201,7 +201,7 @@
   .asset-ticker {
     font-family: var(--font);
     font-weight: 300;
-    font-size: 0.73rem;
+    font-size: 0.63rem;
     color: var(--muted);
     margin-top: 2px;
     white-space: nowrap;
@@ -211,21 +211,21 @@
   .asset-period {
     font-family: var(--font);
     font-weight: 300;
-    font-size: 0.68rem;
+    font-size: 0.6rem;
     color: #3a4a5a;
     margin-top: 1px;
   }
   .asset-capital {
     font-family: var(--font);
     font-weight: 300;
-    font-size: 0.82rem;
-    color: var(--muted);
+    font-size: 0.8rem;
+    color: #ffffff;
     text-align: right;
   }
   .asset-nums { display: contents; }
   .asset-ganancia {
     font-family: var(--font);
-    font-size: 1rem;
+    font-size: 0.95rem;
     font-weight: 600;
     text-align: right;
     white-space: nowrap;
@@ -236,7 +236,7 @@
     font-size: 0.8rem;
     text-align: right;
     white-space: nowrap;
-    padding: 4px 9px;
+    padding: 4px 8px;
     border-radius: 6px;
     flex-shrink: 0;
   }
@@ -379,20 +379,6 @@
     margin-right: 5px;
     vertical-align: middle;
     flex-shrink: 0;
-  }
-  .apor-legend {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 6px 16px;
-    margin-top: 12px;
-    padding: 0 2px;
-  }
-  .apor-legend span {
-    display: flex;
-    align-items: center;
-    font-size: 0.7rem;
-    color: var(--muted);
-    white-space: nowrap;
   }
 
 
@@ -652,7 +638,7 @@
     .hero-card.main { grid-column: 1; }
     .card-value { font-size: 2rem; }
     .asset-row { grid-template-columns: 12px 1fr auto; gap: 8px 12px; align-items: center; }
-    .asset-nums { display: flex; flex-direction: column; align-items: flex-end; gap: 1px; }
+    .asset-nums { display: flex; flex-direction: column; align-items: flex-end; gap: 3px; }
     .asset-capital { font-size: 0.68rem; }
     .asset-ganancia { font-size: 0.82rem; }
     .asset-pct { font-size: 0.65rem; padding: 2px 6px; }
@@ -1105,7 +1091,7 @@ function renderAportaciones() {
 
   const thead = `<thead><tr>
     <th>Mes</th>
-    ${activos.map(a => `<th><span class="apor-dot" style="background:${a.color}"></span></th>`).join('')}
+    ${activos.map(a => `<th><span class="apor-dot" style="background:${a.color}"></span>${a.nombre || a.name}</th>`).join('')}
     <th class="apor-total">Total mes</th>
     <th class="apor-acum">Acumulado</th>
   </tr></thead>`;
@@ -1132,9 +1118,7 @@ function renderAportaciones() {
     <td class="apor-acum"></td>
   </tr></tfoot>`;
 
-  const leyenda = `<div class="apor-legend">${activos.map(a => `<span><span class="apor-dot" style="background:${a.color}"></span>${a.nombre || a.name}</span>`).join('')}</div>`;
-
-  wrap.innerHTML = `<table class="apor-table">${thead}<tbody>${tbody}</tbody>${tfoot}</table>${leyenda}`;
+  wrap.innerHTML = `<table class="apor-table">${thead}<tbody>${tbody}</tbody>${tfoot}</table>`;
 }
 
 // ── INFLACIÓN ────────────────────────────────────────────────────────────────
