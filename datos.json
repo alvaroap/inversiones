@@ -50,7 +50,7 @@
       "color": "#c8f135",
       "capitalInicial": 2000,
       "desdeMes": "Ene",
-      "hastaMes": "Mar"
+      "hastaMes": "Feb"
     },
     {
       "id": "mega",
@@ -59,7 +59,7 @@
       "color": "#ff7b54",
       "capitalInicial": 4840,
       "desdeMes": "Ene",
-      "hastaMes": "Mar"
+      "hastaMes": "Feb"
     }
   ],
   "datos": {
@@ -109,23 +109,23 @@
     },
     "Mar": {
       "bbva": {
-        "valor": 13237,
+        "valor": 13168,
         "aportacion": 0
       },
       "vanguard": {
-        "valor": 7163,
+        "valor": 7135,
         "aportacion": 390
       },
       "quality": {
-        "valor": 2133,
+        "valor": 2110,
         "aportacion": 0
       },
       "redeia": {
-        "valor": 1835,
+        "valor": 0,
         "aportacion": 0
       },
       "mega": {
-        "valor": 5701,
+        "valor": 0,
         "aportacion": 0
       }
     },
