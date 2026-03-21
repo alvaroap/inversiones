@@ -1,1 +1,32 @@
+name: Actualización Diaria de Precios
 
+on:
+  schedule:
+    - cron: '0 22 * * *'
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout del código
+        uses: actions/checkout@v3
+
+      - name: Configurar Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'
+
+      - name: Instalar dependencias
+        run: pip install yfinance
+
+      - name: Ejecutar script de actualización
+        run: python actualizar.py --auto
+
+      - name: Guardar cambios en GitHub
+        run: |
+          git config --global user.name 'GitHub Action'
+          git config --global user.email 'action@github.com'
+          git add datos.json
+          git commit -m "Actualización automática de precios mercado" || exit 0
+          git push
