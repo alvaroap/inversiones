@@ -220,6 +220,13 @@
     font-weight: 300;
     font-size: 0.8rem;
     color: #ffffff;
+    text-align: left;
+  }
+  .asset-valor {
+    font-family: var(--font);
+    font-weight: 300;
+    font-size: 0.8rem;
+    color: #ffffff;
     text-align: right;
   }
   .asset-nums { display: contents; }
@@ -934,9 +941,10 @@ function render() {
             <div class="asset-name">${a.name}</div>
             <div class="asset-ticker">${a.ticker}</div>
             ${period?`<div class="asset-period">${period}</div>`:''}
+            <div class="asset-capital" style="margin-top:5px">${has?fmt(c):'—'}</div>
           </div>
           <div class="asset-nums">
-            <div class="asset-capital">${has?fmt(c):'—'}</div>
+            <div class="asset-valor">${has?fmt(v):'—'}</div>
             <div class="asset-ganancia" style="color:${!has?'var(--muted)':g2>=0?'var(--gain)':'var(--loss)'}">
               ${has?(g2>=0?'+':'')+fmt(g2):(!active?'Cerrado':'—')}
             </div>
