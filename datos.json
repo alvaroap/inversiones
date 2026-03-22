@@ -28,7 +28,7 @@
     {
       "id": "vanguard",
       "nombre": "Vanguard Global",
-      "ticker": "IE00B03HCZ61",
+      "ticker": "0P00000RQC.F",
       "color": "#34d399",
       "capitalInicial": 7274,
       "desdeMes": "Ene",
@@ -113,7 +113,7 @@
         "aportacion": 0
       },
       "vanguard": {
-        "valor": 7079,
+        "valor": 7463,
         "aportacion": 390
       },
       "quality": {
