@@ -109,6 +109,28 @@
     },
     "Mar": {
       "bbva": {
+        "valor": 13796,
+        "aportacion": 0
+      },
+      "vanguard": {
+        "valor": 7458,
+        "aportacion": 0
+      },
+      "quality": {
+        "valor": 2052,
+        "aportacion": 0
+      },
+      "redeia": {
+        "valor": 0,
+        "aportacion": 0
+      },
+      "mega": {
+        "valor": 0,
+        "aportacion": 0
+      }
+    },
+    "Abr": {
+      "bbva": {
         "valor": 14483,
         "aportacion": 0
       },
@@ -129,39 +151,17 @@
         "aportacion": 0
       }
     },
-    "Abr": {
-      "bbva": {
-        "valor": 14483,
-        "aportacion": 0
-      },
-      "vanguard": {
-        "valor": 7642,
-        "aportacion": 0
-      },
-      "quality": {
-        "valor": 2076,
-        "aportacion": 0
-      },
-      "redeia": {
-        "valor": 0,
-        "aportacion": 0
-      },
-      "mega": {
-        "valor": 0,
-        "aportacion": 0
-      }
-    },
     "May": {
       "bbva": {
-        "valor": 0,
+        "valor": 14803,
         "aportacion": 0
       },
       "vanguard": {
-        "valor": 0,
+        "valor": 7910,
         "aportacion": 0
       },
       "quality": {
-        "valor": 0,
+        "valor": 2151,
         "aportacion": 0
       },
       "redeia": {
