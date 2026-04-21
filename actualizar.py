@@ -2,6 +2,7 @@ import json
 import yfinance as yf
 import os
 import sys
+import math
 from datetime import datetime
 
 DIRECTORIO = os.path.dirname(os.path.abspath(__file__))
@@ -10,7 +11,6 @@ ARCHIVO_JSON = os.path.join(DIRECTORIO, "datos.json")
 MESES_MAP = {"Ene": 1, "Feb": 2, "Mar": 3, "Abr": 4, "May": 5, "Jun": 6, 
              "Jul": 7, "Ago": 8, "Sep": 9, "Oct": 10, "Nov": 11, "Dic": 12}
 
-# Configuración con Ticker EUR para Vanguard y tus títulos reales
 MIS_TITULOS = {
     "bbva": {"ticker": "BBVA.MC", "titulos": 735},
     "vanguard": {"ticker": "0P00000RQC.F", "titulos": 137.54}, 
@@ -23,11 +23,8 @@ def actualizar():
     with open(ARCHIVO_JSON, 'r', encoding='utf-8') as f:
         data = json.load(f)
 
-    # DETECTAR SI ES EL ROBOT O ERES TÚ
     es_auto = "--auto" in sys.argv
-    
     if es_auto:
-        # El robot elige el mes actual solo
         meses_lista = ["", "Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"]
         mes_dest = meses_lista[datetime.now().month]
     else:
@@ -40,16 +37,20 @@ def actualizar():
         id_act = activo["id"]
         if MESES_MAP[activo["desdeMes"]] <= num_mes_dest <= MESES_MAP[activo["hastaMes"]]:
             info = MIS_TITULOS.get(id_act)
+            precio = 0
             try:
                 ticker_yf = yf.Ticker(info["ticker"])
                 hist = ticker_yf.history(period="5d")
-                precio = hist['Close'].tail(1).values[0] if not hist.empty else 0
-            except: precio = 0
+                if not hist.empty:
+                    precio = hist['Close'].tail(1).values[0]
+            except:
+                precio = 0
 
-            # Guardar valor total
-            data["datos"][mes_dest][id_act]["valor"] = round(precio * info["titulos"])
-
-            # SOLO preguntar aportación si NO es el robot
+            # COMPROBACIÓN ANTIFALLO: Solo guarda si el precio es un número válido
+            if precio and not math.isnan(precio):
+                valor_total = round(float(precio) * info["titulos"])
+                data["datos"][mes_dest][id_act]["valor"] = valor_total
+            
             if not es_auto:
                 apor = input(f"   💸 Aportación para {id_act} (Enter para 0): ")
                 data["datos"][mes_dest][id_act]["aportacion"] = round(float(apor)) if apor else 0
