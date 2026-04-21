@@ -30,3 +30,11 @@ jobs:
           git add datos.json
           git commit -m "Actualización automática de precios mercado" || exit 0
           git push
+
+      - name: Guardar cambios en datos.json
+        run: |
+          git config --global user.name 'github-actions[bot]'
+          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+          git add datos.json
+          git commit -m "🤖 Actualización automática de precios" || echo "Sin cambios para subir"
+          git push
