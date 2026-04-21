@@ -3,6 +3,7 @@ import yfinance as yf
 import os
 import sys
 import math
+import time
 from datetime import datetime
 
 DIRECTORIO = os.path.dirname(os.path.abspath(__file__))
@@ -19,6 +20,19 @@ MIS_TITULOS = {
     "mega": {"ticker": "ES0147711032", "titulos": 115.537}
 }
 
+def obtener_precio(ticker_str):
+    try:
+        t = yf.Ticker(ticker_str)
+        # Intentamos obtener un historial más amplio para asegurar que haya datos
+        hist = t.history(period="1mo") 
+        if not hist.empty:
+            # Cogemos el último valor que NO sea NaN
+            precio = hist['Close'].dropna().iloc[-1]
+            return float(precio)
+    except:
+        pass
+    return None
+
 def actualizar():
     with open(ARCHIVO_JSON, 'r', encoding='utf-8') as f:
         data = json.load(f)
@@ -31,30 +45,27 @@ def actualizar():
         mes_dest = input("¿Qué mes quieres actualizar? (Ene/Feb/Mar/Abr...): ")
 
     if mes_dest not in MESES_MAP: return
-
     num_mes_dest = MESES_MAP[mes_dest]
+
     for activo in data["activos"]:
         id_act = activo["id"]
         if MESES_MAP[activo["desdeMes"]] <= num_mes_dest <= MESES_MAP[activo["hastaMes"]]:
             info = MIS_TITULOS.get(id_act)
-            precio = 0
-            try:
-                ticker_yf = yf.Ticker(info["ticker"])
-                hist = ticker_yf.history(period="5d")
-                if not hist.empty:
-                    precio = hist['Close'].tail(1).values[0]
-            except:
-                precio = 0
-
-            # COMPROBACIÓN ANTIFALLO: Solo guarda si el precio es un número válido
+            precio = obtener_precio(info["ticker"])
+            
             if precio and not math.isnan(precio):
-                valor_total = round(float(precio) * info["titulos"])
+                valor_total = round(precio * info["titulos"])
                 data["datos"][mes_dest][id_act]["valor"] = valor_total
+                print(f"✅ {id_act}: {valor_total}€")
+            else:
+                print(f"⚠️ {id_act}: No se pudo obtener precio")
             
             if not es_auto:
                 apor = input(f"   💸 Aportación para {id_act} (Enter para 0): ")
                 data["datos"][mes_dest][id_act]["aportacion"] = round(float(apor)) if apor else 0
-        
+            
+            time.sleep(2) # Pausa generosa para evitar bloqueos de Yahoo
+
     with open(ARCHIVO_JSON, 'w', encoding='utf-8') as f:
         json.dump(data, f, indent=2, ensure_ascii=False)
 
