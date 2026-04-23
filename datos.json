@@ -6,7 +6,7 @@
       "titulos": 735.0
     },
     "vanguard": {
-      "ticker": "0P00000RQC.F",
+      "ticker": "IE00B03HD191.IR",
       "titulos": 140.98
     },
     "fidelity": {
@@ -54,7 +54,7 @@
     {
       "id": "vanguard",
       "nombre": "Vanguard Global",
-      "ticker": "0P00000RQC.F",
+      "ticker": "IE00B03HD191.IR",
       "color": "#34d399",
       "capitalInicial": 7274,
       "desdeMes": "Ene",
