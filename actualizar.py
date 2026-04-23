@@ -14,7 +14,8 @@ MESES_MAP = {"Ene": 1, "Feb": 2, "Mar": 3, "Abr": 4, "May": 5, "Jun": 6,
 
 MIS_TITULOS = {
     "bbva": {"ticker": "BBVA.MC", "titulos": 735},
-    "vanguard": {"ticker": "0P00000RQC.F", "titulos": 137.54}, 
+    "vanguard": {"ticker": "0P00000RQC.F", "titulos": 137.54},
+    "fidelity": {"ticker": "IE00BYX5NX33", "titulos": 0.00},
     "quality": {"ticker": "ES0157663008", "titulos": 124.118},
     "redeia": {"ticker": "RED.MC", "titulos": 122},
     "mega": {"ticker": "ES0147711032", "titulos": 115.537}
