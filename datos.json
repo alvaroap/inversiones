@@ -39,7 +39,7 @@
       "nombre": "Fidelity MSCI",
       "ticker": "IE00BYX5NX33",
       "color": "#fbbf24",
-      "capitalInicial": 0000,
+      "capitalInicial": 1,
       "desdeMes": "May",
       "hastaMes": "Dic"
     },
