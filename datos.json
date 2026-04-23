@@ -178,11 +178,11 @@
     },
     "Abr": {
       "bbva": {
-        "valor": 13722,
+        "valor": 13715,
         "aportacion": 0
       },
       "vanguard": {
-        "valor": 8207,
+        "valor": 8022,
         "aportacion": 200
       },
       "fidelity": {
@@ -230,19 +230,19 @@
     },
     "Jun": {
       "bbva": {
-        "valor": 13715,
+        "valor": 0,
         "aportacion": 0
       },
       "vanguard": {
-        "valor": 8022,
-        "aportacion": 200
+        "valor": 0,
+        "aportacion": 0
       },
       "fidelity": {
         "valor": 0,
         "aportacion": 0
       },
       "quality": {
-        "valor": 2176,
+        "valor": 0,
         "aportacion": 0
       },
       "redeia": {
