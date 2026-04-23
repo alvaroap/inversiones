@@ -17,16 +17,11 @@ def obtener_precio(ticker_str):
         t = yf.Ticker(ticker_str)
         hist = t.history(period="1mo") 
         if not hist.empty:
-            precio = hist['Close'].dropna().iloc[-1]
-            return float(precio)
+            return float(hist['Close'].dropna().iloc[-1])
     except: pass
     return None
 
 def actualizar():
-    if not os.path.exists(ARCHIVO_JSON):
-        print(f"❌ Error: No se encuentra {ARCHIVO_JSON}")
-        return
-
     with open(ARCHIVO_JSON, 'r', encoding='utf-8') as f:
         data = json.load(f)
 
@@ -34,43 +29,54 @@ def actualizar():
     meses_lista = ["", "Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"]
     mes_dest = meses_lista[datetime.now().month] if es_auto else input("¿Mes a actualizar? (Ene/Feb...): ")
 
-    if mes_dest not in MESES_MAP: 
-        print("❌ Mes no válido")
-        return
+    if mes_dest not in MESES_MAP: return
+    num_mes_dest = MESES_MAP[mes_dest]
+
+    # Creamos un diccionario auxiliar para saber si un activo está activo este mes
+    # basándonos en la lista 'activos' del JSON
+    activos_vigentes = {}
+    for a in data["activos"]:
+        inicio = MESES_MAP[a["desdeMes"]]
+        fin = MESES_MAP[a["hastaMes"]]
+        if inicio <= num_mes_dest <= fin:
+            activos_vigentes[a["id"]] = True
 
     print(f"\n--- ACTUALIZANDO {mes_dest.upper()} ---")
 
     for id_act, config in data["config_inversiones"].items():
-        # 1. Gestión de Títulos (Manual vs Auto)
-        titulos_actuales = config["titulos"]
-        if not es_auto:
-            print(f"\n[{id_act.upper()}]")
-            nuevo_tits = input(f"   🔢 Participaciones actuales ({titulos_actuales}): ")
-            if nuevo_tits:
-                titulos_actuales = float(nuevo_tits.replace(",", "."))
-                data["config_inversiones"][id_act]["titulos"] = titulos_actuales
+        # FILTRO: Si el activo no está vigente este mes, lo saltamos completamente
+        if id_act not in activos_vigentes:
+            continue
 
-        # 2. Cálculo de Valor de Mercado
+        print(f"\n[{id_act.upper()}]")
+        
+        # 1. Gestión de Títulos
+        titulos = config["titulos"]
+        if not es_auto:
+            nuevo_tits = input(f"   🔢 Participaciones actuales ({titulos}): ")
+            if nuevo_tits:
+                titulos = float(nuevo_tits.replace(",", "."))
+                data["config_inversiones"][id_act]["titulos"] = titulos
+
+        # 2. Obtener precio y calcular valor
         precio = obtener_precio(config["ticker"])
-        if precio and not math.isnan(precio):
-            valor_mercado = round(precio * titulos_actuales)
+        if precio:
+            valor_mercado = round(precio * titulos)
             data["datos"][mes_dest][id_act]["valor"] = valor_mercado
             print(f"   ✅ Precio: {precio:.2f} | Valor: {valor_mercado}€")
-        else:
-            print(f"   ⚠️ Error de conexión con Yahoo para {id_act}")
-
-        # 3. Gestión de Aportaciones (Solo Manual)
+        
+        # 3. Aportación (Solo manual)
         if not es_auto:
             apor = input(f"   💸 Aportación este mes: ")
             if apor:
                 data["datos"][mes_dest][id_act]["aportacion"] = round(float(apor.replace(",", ".")))
 
-        time.sleep(1.5) # Pausa para evitar bloqueos de Yahoo
+        time.sleep(1.5)
 
     with open(ARCHIVO_JSON, 'w', encoding='utf-8') as f:
         json.dump(data, f, indent=2, ensure_ascii=False)
     
-    print("\n🚀 Proceso finalizado. datos.json actualizado.")
+    print("\n🚀 Actualización completada.")
 
 if __name__ == "__main__":
     actualizar()
