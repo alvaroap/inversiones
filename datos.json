@@ -10,7 +10,7 @@
       "titulos": 140.98
     },
     "fidelity": {
-      "ticker": "IE00BYX5NX33",
+      "ticker": "0P0001CLDK.F",
       "titulos": 15.167
     },
     "quality": {
@@ -63,7 +63,7 @@
     {
       "id": "fidelity",
       "nombre": "Fidelity MSCI",
-      "ticker": "IE00BYX5NX33",
+      "ticker": "0P0001CLDK.F",
       "color": "#fbbf24",
       "capitalInicial": 0,
       "desdeMes": "Abr",
@@ -186,7 +186,7 @@
         "aportacion": 200
       },
       "fidelity": {
-        "valor": 0,
+        "valor": 196,
         "aportacion": 196
       },
       "quality": {
