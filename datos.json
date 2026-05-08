@@ -11,11 +11,11 @@
     },
     "fidelity": {
       "ticker": "IE00BYX5NX33.SG",
-      "titulos": 15.167
+      "titulos": 180.88
     },
     "quality": {
       "ticker": "ES0157663008",
-      "titulos": 124.118
+      "titulos": 0.0
     },
     "redeia": {
       "ticker": "RED.MC",
@@ -178,11 +178,11 @@
     },
     "Abr": {
       "bbva": {
-        "valor": 13579,
+        "valor": 13715,
         "aportacion": 0
       },
       "vanguard": {
-        "valor": 8181,
+        "valor": 8022,
         "aportacion": 200
       },
       "fidelity": {
@@ -190,7 +190,7 @@
         "aportacion": 196
       },
       "quality": {
-        "valor": 2173,
+        "valor": 2176,
         "aportacion": 0
       },
       "redeia": {
@@ -204,7 +204,7 @@
     },
     "May": {
       "bbva": {
-        "valor": 13873,
+        "valor": 13932,
         "aportacion": 0
       },
       "vanguard": {
@@ -212,11 +212,11 @@
         "aportacion": 0
       },
       "fidelity": {
-        "valor": 0,
-        "aportacion": 0
+        "valor": 2405,
+        "aportacion": 2173
       },
       "quality": {
-        "valor": 2179,
+        "valor": 0,
         "aportacion": 0
       },
       "redeia": {
