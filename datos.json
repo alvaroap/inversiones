@@ -12,18 +12,6 @@
     "fidelity": {
       "ticker": "IE00BYX5NX33.SG",
       "titulos": 180.88
-    },
-    "quality": {
-      "ticker": "ES0157663008",
-      "titulos": 0.0
-    },
-    "redeia": {
-      "ticker": "RED.MC",
-      "titulos": 0.0
-    },
-    "mega": {
-      "ticker": "ES0147711032",
-      "titulos": 0.0
     }
   },
   "_colores_disponibles": {
@@ -68,33 +56,6 @@
       "capitalInicial": 0,
       "desdeMes": "Abr",
       "hastaMes": "Dic"
-    },
-    {
-      "id": "quality",
-      "nombre": "BBVA Quality Inv.",
-      "ticker": "ES0157663008",
-      "color": "#a78bfa",
-      "capitalInicial": 1910,
-      "desdeMes": "Ene",
-      "hastaMes": "May"
-    },
-    {
-      "id": "redeia",
-      "nombre": "Redeia",
-      "ticker": "RED (BME)",
-      "color": "#c8f135",
-      "capitalInicial": 2000,
-      "desdeMes": "Ene",
-      "hastaMes": "Feb"
-    },
-    {
-      "id": "mega",
-      "nombre": "megatendencia tecnologia",
-      "ticker": "ES0147711032",
-      "color": "#ff7b54",
-      "capitalInicial": 4840,
-      "desdeMes": "Ene",
-      "hastaMes": "Feb"
     }
   ],
   "datos": {
@@ -110,18 +71,6 @@
       "fidelity": {
         "valor": 0,
         "aportacion": 0
-      },
-      "quality": {
-        "valor": 2146,
-        "aportacion": 0
-      },
-      "redeia": {
-        "valor": 1833,
-        "aportacion": 0
-      },
-      "mega": {
-        "valor": 5655,
-        "aportacion": 0
       }
     },
     "Feb": {
@@ -136,18 +85,6 @@
       "fidelity": {
         "valor": 0,
         "aportacion": 0
-      },
-      "quality": {
-        "valor": 2174,
-        "aportacion": 0
-      },
-      "redeia": {
-        "valor": 1952,
-        "aportacion": 0
-      },
-      "mega": {
-        "valor": 5319,
-        "aportacion": 300
       }
     },
     "Mar": {
@@ -162,18 +99,6 @@
       "fidelity": {
         "valor": 0,
         "aportacion": 0
-      },
-      "quality": {
-        "valor": 2176,
-        "aportacion": 0
-      },
-      "redeia": {
-        "valor": 1814,
-        "aportacion": 0
-      },
-      "mega": {
-        "valor": 0,
-        "aportacion": 5662
       }
     },
     "Abr": {
@@ -188,18 +113,6 @@
       "fidelity": {
         "valor": 196,
         "aportacion": 196
-      },
-      "quality": {
-        "valor": 2176,
-        "aportacion": 0
-      },
-      "redeia": {
-        "valor": 0,
-        "aportacion": 0
-      },
-      "mega": {
-        "valor": 0,
-        "aportacion": 0
       }
     },
     "May": {
@@ -214,18 +127,6 @@
       "fidelity": {
         "valor": 2405,
         "aportacion": 2173
-      },
-      "quality": {
-        "valor": 0,
-        "aportacion": 0
-      },
-      "redeia": {
-        "valor": 0,
-        "aportacion": 0
-      },
-      "mega": {
-        "valor": 0,
-        "aportacion": 0
       }
     },
     "Jun": {
@@ -238,18 +139,6 @@
         "aportacion": 0
       },
       "fidelity": {
-        "valor": 0,
-        "aportacion": 0
-      },
-      "quality": {
-        "valor": 0,
-        "aportacion": 0
-      },
-      "redeia": {
-        "valor": 0,
-        "aportacion": 0
-      },
-      "mega": {
         "valor": 0,
         "aportacion": 0
       }
@@ -266,18 +155,6 @@
       "fidelity": {
         "valor": 0,
         "aportacion": 0
-      },
-      "quality": {
-        "valor": 0,
-        "aportacion": 0
-      },
-      "redeia": {
-        "valor": 0,
-        "aportacion": 0
-      },
-      "mega": {
-        "valor": 0,
-        "aportacion": 0
       }
     },
     "Ago": {
@@ -290,18 +167,6 @@
         "aportacion": 0
       },
       "fidelity": {
-        "valor": 0,
-        "aportacion": 0
-      },
-      "quality": {
-        "valor": 0,
-        "aportacion": 0
-      },
-      "redeia": {
-        "valor": 0,
-        "aportacion": 0
-      },
-      "mega": {
         "valor": 0,
         "aportacion": 0
       }
@@ -318,18 +183,6 @@
       "fidelity": {
         "valor": 0,
         "aportacion": 0
-      },
-      "quality": {
-        "valor": 0,
-        "aportacion": 0
-      },
-      "redeia": {
-        "valor": 0,
-        "aportacion": 0
-      },
-      "mega": {
-        "valor": 0,
-        "aportacion": 0
       }
     },
     "Oct": {
@@ -342,18 +195,6 @@
         "aportacion": 0
       },
       "fidelity": {
-        "valor": 0,
-        "aportacion": 0
-      },
-      "quality": {
-        "valor": 0,
-        "aportacion": 0
-      },
-      "redeia": {
-        "valor": 0,
-        "aportacion": 0
-      },
-      "mega": {
         "valor": 0,
         "aportacion": 0
       }
@@ -370,18 +211,6 @@
       "fidelity": {
         "valor": 0,
         "aportacion": 0
-      },
-      "quality": {
-        "valor": 0,
-        "aportacion": 0
-      },
-      "redeia": {
-        "valor": 0,
-        "aportacion": 0
-      },
-      "mega": {
-        "valor": 0,
-        "aportacion": 0
       }
     },
     "Dic": {
@@ -394,18 +223,6 @@
         "aportacion": 0
       },
       "fidelity": {
-        "valor": 0,
-        "aportacion": 0
-      },
-      "quality": {
-        "valor": 0,
-        "aportacion": 0
-      },
-      "redeia": {
-        "valor": 0,
-        "aportacion": 0
-      },
-      "mega": {
         "valor": 0,
         "aportacion": 0
       }
